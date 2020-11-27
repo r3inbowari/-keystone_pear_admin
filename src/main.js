@@ -1,22 +1,29 @@
-import Vue from 'vue'
+// import Vue from 'vue'
 import App from './App.vue'
-import Vant from 'vant'
-import 'vant/lib/index.css'
+
+
 import axios from "axios"
 import VCharts from 'v-charts'
 import VueAxios from "vue-axios"
 import router from "./router"
-import { Notify } from 'vant'
-import { Dialog } from 'vant'
-import { Lazyload } from 'vant'
+// import Vant from 'vant'
+// import 'vant/lib/index.css'
+// import { Notify } from 'vant'
+// import { Dialog } from 'vant'
+// import { Lazyload } from 'vant'
 import vuetify from './plugins/vuetify'
 
-Vue.use(Dialog);
+// Vue.use(Dialog);
 Vue.use(VCharts)
-Vue.use(Lazyload)
-Vue.use(Notify);
+// Vue.use(Lazyload)
+// Vue.use(Notify);
 Vue.use(VueAxios, axios)
-Vue.use(Vant)
+// Vue.use(Vant)
+
+
+// 通过 CDN 引入时不会自动注册 Lazyload 组件
+// 可以通过下面的方式手动注册
+Vue.use(vant.Lazyload);
 
 Vue.config.productionTip = false
 

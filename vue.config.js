@@ -2,13 +2,12 @@ const CompressionWebpackPlugin = require("compression-webpack-plugin")
 
 module.exports = {
   configureWebpack: config => {
-    // externals: {
-    // 	[
-    // 		'Vue',
-    // 		'VueAxios',
-    // 		'ElementUI',
-    // 	]
-    // }
+    externals: {
+    	[
+    		'Vue',
+    		'Vant',
+    	]
+    }
     //if (process.env.NODE_ENV === 'prodution') {
     const productionGzipExtensions = ['html', 'js', 'css']
     config.plugins.push(
