@@ -1,13 +1,9 @@
 <template>
-  <div id="app">
-    <!-- <img alt="Vue logo" src="./assets/logo.png" />
-    <van-uploader :after-read="afterRead">
-      <van-button icon="plus" type="primary">上传文件</van-button>
-    </van-uploader> -->
+  <v-app>
     <router-view style="margin-bottom: 50px;"></router-view>
 
     <van-tabbar v-model="tabbar_active" active-color="#32BAC0" inactive-color="#979797">
-      <van-tabbar-item badge="4" to="/home">
+      <van-tabbar-item badge="1" to="/home">
         <span style="font-weight:bold;">主页</span>
         <template #icon="props">
           <img :src="props.active ? icon_home.active : icon_home.inactive" />
@@ -21,14 +17,14 @@
         </template>
       </van-tabbar-item>
 
-      <van-tabbar-item badge="1" to="/me">
+      <van-tabbar-item badge="3" to="/me">
         <span style="font-weight:bold;">我的</span>
         <template #icon="props">
           <img :src="props.active ? icon_me.active : icon_me.inactive" />
         </template>
       </van-tabbar-item>
     </van-tabbar>
-  </div>
+  </v-app>
 </template>
 
 <script>

@@ -5,6 +5,8 @@ import Home from "@/components/Home";
 import Dash from "@/components/Dash";
 import Me from "@/components/Me";
 import Sensor from "@/components/Sensor";
+import Message from "@/components/Message";
+import Update from "@/components/Update";
 
 Vue.use(Router);
 
@@ -35,6 +37,16 @@ export default new Router({
 			path: "/sensor",
 			name: "Sensor",
 			component: Sensor,
+		},
+		{
+			path: "/message",
+			name: "Message",
+			component: Message,
+		},
+		{
+			path: "/update",
+			name: "Update",
+			component: Update,
 		},
 	],
 });

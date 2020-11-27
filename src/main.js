@@ -7,9 +7,11 @@ import VCharts from 'v-charts'
 import VueAxios from "vue-axios"
 import router from "./router"
 import { Notify } from 'vant'
-
-
+import { Dialog } from 'vant'
 import { Lazyload } from 'vant'
+import vuetify from './plugins/vuetify'
+
+Vue.use(Dialog);
 Vue.use(VCharts)
 Vue.use(Lazyload)
 Vue.use(Notify);
@@ -20,6 +22,7 @@ Vue.config.productionTip = false
 
 new Vue({
   router,
+
   data() {
     return {
       timerList: [],
@@ -41,5 +44,7 @@ new Vue({
       }
     }
   },
-  render: h => h(App),
+
+  vuetify,
+  render: h => h(App)
 }).$mount('#app')

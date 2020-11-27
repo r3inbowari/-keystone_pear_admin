@@ -26,7 +26,7 @@
                 area="大棚A区 | 模式 手动模式"
                 id="fa38c7e7-865d-4322-b693-d9f715857d2a"
                 pos="0"
-                type='coupler'
+                type="coupler"
               ></IOTCard>
             </van-col>
             <van-col span="11">
@@ -36,7 +36,7 @@
                 area="大棚B区 | 模式 子设备"
                 id="fa38c7e7-865d-4322-b693-d9f715857d2b"
                 pos="0"
-                type='coupler'
+                type="coupler"
               ></IOTCard>
             </van-col>
             <van-col span="11">
@@ -46,7 +46,7 @@
                 area="大棚A区 | 模式 手动模式"
                 id="fa38c7e7-865d-4322-b693-d9f715857d2a"
                 pos="1"
-                type='coupler'
+                type="coupler"
               ></IOTCard>
             </van-col>
             <van-col span="11">
@@ -56,7 +56,7 @@
                 area="大棚B区 | 模式 子设备"
                 id="fa38c7e7-865d-4322-b693-d9f715857d2b"
                 pos="1"
-                type='coupler'
+                type="coupler"
               ></IOTCard>
             </van-col>
             <van-col span="11">
@@ -65,7 +65,7 @@
                 name="温湿度传感器"
                 area="大棚A区 | 模式 自动模式"
                 id="fa38c7e7-865d-4322-b693-d9f715857d2a"
-                type='bme'
+                type="bme"
               ></IOTCard>
             </van-col>
             <van-col span="11">
@@ -74,7 +74,7 @@
                 name="气压传感器"
                 area="大棚A区 | 模式 自动模式"
                 id="fa38c7e7-865d-4322-b693-d9f715857d2a"
-                type='bme'
+                type="bme"
               ></IOTCard>
             </van-col>
             <van-col span="11">
@@ -83,7 +83,7 @@
                 name="光照传感器"
                 area="大棚A区 | 模式 自动模式"
                 id="fa38c7e7-865d-4322-b693-d9f715857d2a"
-                type='apds'
+                type="apds"
               ></IOTCard>
             </van-col>
             <van-col span="11">
@@ -92,7 +92,7 @@
                 name="二氧化碳传感器"
                 area="大棚A区 | 模式 自动模式"
                 id="fa38c7e7-865d-4322-b693-d9f715857d2a"
-                type='ccs'
+                type="ccs"
               ></IOTCard>
             </van-col>
           </van-row>

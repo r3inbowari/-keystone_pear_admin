@@ -54,6 +54,9 @@ export default {
       this.status = true;
     }
   },
+  destroyed() {
+    this.$root.resetAllTimer();
+  },
   methods: {
     onCancel() {
       this.show = false;
@@ -64,7 +67,6 @@ export default {
           this.show = true;
         } else {
           console.log("[INFO] 跳转到" + this.name + "详细页");
-          this.$root.resetAllTimer();
           this.$router.push({
             name: "Sensor",
             params: { id: this.id, type: this.type, name: this.name },
@@ -90,8 +92,13 @@ export default {
             that.status = res.data.data.coupler1;
           }
           this.actions.length = 0;
-          this.actions.push({ name: "打开设备", disabled: this.status });
-          this.actions.push({ name: "关闭设备", disabled: !this.status });
+          if (this.status) {
+            this.actions.push({ name: "打开设备", color: "#979797" });
+            this.actions.push({ name: "关闭设备" });
+          } else {
+            this.actions.push({ name: "打开设备" });
+            this.actions.push({ name: "关闭设备", color: "#979797" });
+          }
         })
         .catch(() => {
           console.log("网络出现问题！");
@@ -111,8 +118,13 @@ export default {
           if (res.data.data === "oper succeed") {
             this.status = val === 6;
             this.actions.length = 0;
-            this.actions.push({ name: "打开设备", disabled: this.status });
-            this.actions.push({ name: "关闭设备", disabled: !this.status });
+            if (this.status) {
+              this.actions.push({ name: "打开设备", color: "#979797" });
+              this.actions.push({ name: "关闭设备" });
+            } else {
+              this.actions.push({ name: "打开设备" });
+              this.actions.push({ name: "关闭设备", color: "#979797" });
+            }
             this.show = false;
             this.$notify({ type: "success", message: "操作成功" });
           }
