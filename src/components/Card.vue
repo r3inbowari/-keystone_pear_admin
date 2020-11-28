@@ -77,8 +77,29 @@ export default {
     select(action) {
       if (action.name === "打开设备") {
         this.onCoupler(6);
+        if (this.name === "加湿器") {
+          this.$root.rhStatus = true;
+        } else if (this.name === "排风系统") {
+          this.$root.ccsStatus = true;
+        }
       } else if (action.name === "关闭设备") {
         this.onCoupler(5);
+        if (this.name === "加湿器") {
+          this.$root.rhStatus = false;
+        } else if (this.name === "排风系统") {
+          this.$root.ccsStatus = false;
+        }
+      } else if (action.name === "切换到联动模式") {
+        this.$root.openRHTask();
+        this.show = false;
+      } else if (action.name === "切换到手动模式") {
+        if (this.name === "加湿器") {
+          this.$root.closeRHTask();
+          this.show = false;
+        } else if (this.name === "排风系统") {
+          this.$root.closeCSSTask();
+          this.show = false;
+        }
       }
     },
     getCoupler() {
@@ -92,6 +113,20 @@ export default {
             that.status = res.data.data.coupler1;
           }
           this.actions.length = 0;
+          if (this.name === "加湿器") {
+            if (this.$root.rhMode === "手动模式") {
+              this.actions.push({ name: "切换到联动模式", color: "green" });
+            } else {
+              this.actions.push({ name: "切换到手动模式", color: "green" });
+            }
+          }
+
+          if (this.name === "排风系统") {
+            if (this.$root.ccsMode === "联动模式") {
+              this.actions.push({ name: "切换到手动模式", color: "green" });
+            }
+          }
+
           if (this.status) {
             this.actions.push({ name: "打开设备", color: "#979797" });
             this.actions.push({ name: "关闭设备" });
@@ -101,10 +136,18 @@ export default {
           }
         })
         .catch(() => {
-          console.log("网络出现问题！");
+          console.log("[INFO] 网络出现问题！");
         });
     },
     onCoupler(val) {
+      console.log(
+        "http://r3inbowari.top:2999/coupler/" +
+          this.id +
+          "?pos=" +
+          this.pos +
+          "&action=" +
+          val
+      );
       this.axios
         .get(
           "http://r3inbowari.top:2999/coupler/" +
@@ -118,6 +161,13 @@ export default {
           if (res.data.data === "oper succeed") {
             this.status = val === 6;
             this.actions.length = 0;
+            if (this.name === "加湿器") {
+              if (this.$root.rhMode === "手动模式") {
+                this.actions.push({ name: "切换到联动模式", color: "green" });
+              } else {
+                this.actions.push({ name: "切换到自动模式", color: "green" });
+              }
+            }
             if (this.status) {
               this.actions.push({ name: "打开设备", color: "#979797" });
               this.actions.push({ name: "关闭设备" });

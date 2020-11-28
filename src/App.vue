@@ -1,24 +1,35 @@
 <template>
   <v-app>
-    <router-view style="margin-bottom: 50px;"></router-view>
+    <router-view style="margin-bottom: 50px"></router-view>
 
-    <van-tabbar v-model="tabbar_active" active-color="#32BAC0" inactive-color="#979797">
+    <van-tabbar
+      v-model="tabbar_active"
+      active-color="#32BAC0"
+      inactive-color="#979797"
+    >
       <van-tabbar-item badge="1" to="/home">
-        <span style="font-weight:bold;">主页</span>
+        <span style="font-weight: bold">主页</span>
         <template #icon="props">
           <img :src="props.active ? icon_home.active : icon_home.inactive" />
         </template>
       </van-tabbar-item>
-      
+
       <van-tabbar-item badge="" to="/dash">
-        <span style="font-weight:bold;">监控台</span>
+        <span style="font-weight: bold">监控台</span>
         <template #icon="props">
           <img :src="props.active ? icon_data.active : icon_data.inactive" />
         </template>
       </van-tabbar-item>
 
+      <van-tabbar-item badge="" to="/wiki">
+        <span style="font-weight: bold">自动化</span>
+        <template #icon="props">
+          <img :src="props.active ? icon_wiki.active : icon_wiki.inactive" />
+        </template>
+      </van-tabbar-item>
+
       <van-tabbar-item badge="3" to="/me">
-        <span style="font-weight:bold;">我的</span>
+        <span style="font-weight: bold">我的</span>
         <template #icon="props">
           <img :src="props.active ? icon_me.active : icon_me.inactive" />
         </template>
@@ -47,6 +58,10 @@ export default {
       icon_me: {
         active: require("@/assets/icon_me_active.png"),
         inactive: require("@/assets/icon_me_inactive.png"),
+      },
+      icon_wiki: {
+        active: require("@/assets/icon_wiki_active.png"),
+        inactive: require("@/assets/icon_wiki_inactive.png"),
       },
     };
   },

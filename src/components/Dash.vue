@@ -132,7 +132,7 @@ export default {
           this.data2.length = 0;
           this.data4.length = 0;
           res.data.forEach((element) => {
-            this.data1.push(Math.floor((element[0] - 10) * 100) / 100);
+            this.data1.push(Math.floor((element[0] - 12) * 100) / 100);
             this.data2.push(element[1]);
             this.data4.push(Math.floor((element[2] / 1000) * 100) / 100);
           });

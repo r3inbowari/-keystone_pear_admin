@@ -137,6 +137,9 @@ export default {
             message: "操作失败，请检查手机网络！",
           });
         });
+
+      this.$root.rhStatus = false;
+      this.$root.ccsStatus = false;
     },
   },
   mounted() {

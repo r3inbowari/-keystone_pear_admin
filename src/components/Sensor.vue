@@ -139,7 +139,7 @@ export default {
       res.forEach((elements) => {
         this.chartData1.rows.push({
           时间: index,
-          温: elements[0] - 10,
+          温: elements[0] - 12,
           湿: elements[1],
         });
         index--;
@@ -207,13 +207,14 @@ export default {
           } else if (this.name === "气压传感器") {
             this.onlineName0 = "大气压强(kPa)";
             this.onlineName1 = "海拔(m)";
-            this.onlineValue0 = res.data.data[3] / 1000;
+            this.onlineValue0 =
+              Math.floor((res.data.data[3] / 1000) * 1000) / 1000;
             this.onlineValue1 = res.data.data[2];
           } else if (this.name === "温湿度传感器") {
             this.onlineName0 = "温度(°C)";
             this.onlineName1 = "湿度(RH)";
-            this.onlineValue0 = Math.floor((res.data.data[0] - 10) * 100) / 100;
-            this.onlineValue1 = res.data.data[1];
+            this.onlineValue0 = Math.floor((res.data.data[1] - 12) * 100) / 100;
+            this.onlineValue1 = res.data.data[0];
           } else if (this.name === "光照传感器") {
             this.onlineName0 = "光照量(Lx)";
             this.onlineName1 = "红光(Lx)";
@@ -227,7 +228,7 @@ export default {
           this.runTime = "更新时间 " + this.formatTime(new Date(), "hh:mm:ss");
         })
         .catch(() => {
-          console.log("网络出现问题！");
+          console.log("[INFO] 网络出现问题！");
         });
     },
   },

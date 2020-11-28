@@ -7,6 +7,7 @@ import Me from "@/components/Me";
 import Sensor from "@/components/Sensor";
 import Message from "@/components/Message";
 import Update from "@/components/Update";
+import Wiki from "@/components/Wiki";
 
 Vue.use(Router);
 
@@ -47,6 +48,11 @@ export default new Router({
 			path: "/update",
 			name: "Update",
 			component: Update,
+		},
+		{
+			path: "/wiki",
+			name: "Wiki",
+			component: Wiki,
 		},
 	],
 });

@@ -23,7 +23,7 @@
               <IOTCard
                 img="https://img.yzcdn.cn/vant/cat.jpeg"
                 name="加湿器"
-                area="大棚A区 | 模式 手动模式"
+                :area="$root.bmeModeStr0"
                 id="fa38c7e7-865d-4322-b693-d9f715857d2a"
                 pos="0"
                 type="coupler"
@@ -33,7 +33,7 @@
               <IOTCard
                 img="https://img.yzcdn.cn/vant/cat.jpeg"
                 name="排风系统"
-                area="大棚B区 | 模式 子设备"
+                :area="$root.ccsModeStr0"
                 id="fa38c7e7-865d-4322-b693-d9f715857d2b"
                 pos="0"
                 type="coupler"
@@ -90,7 +90,7 @@
               <IOTCard
                 img="https://img.yzcdn.cn/vant/cat.jpeg"
                 name="二氧化碳传感器"
-                area="大棚A区 | 模式 自动模式"
+                :area="ccsModeStr1"
                 id="fa38c7e7-865d-4322-b693-d9f715857d2a"
                 type="ccs"
               ></IOTCard>
@@ -119,6 +119,7 @@ export default {
   props: {},
   data() {
     return {
+      ccsModeStr1: "大棚A区 | 模式 " + this.$root.ccsMode,
       config: {
         status: true,
       },
