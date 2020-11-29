@@ -96,7 +96,11 @@ export default {
         .then((res) => {
           this.data0.length = 0;
           res.data.forEach((element) => {
-            this.data0.push(element[0]);
+            if (element === null) {
+              this.data0.push(Math.floor(0));
+            } else {
+              this.data0.push(element[0]);
+            }
           });
           this.data0.reverse();
         })
@@ -113,7 +117,11 @@ export default {
         .then((res) => {
           this.data3.length = 0;
           res.data.forEach((element) => {
-            this.data3.push(element[0]);
+            if (element === null) {
+              this.data3.push(Math.floor(0));
+            } else {
+              this.data3.push(element[0]);
+            }
           });
           this.data3.reverse();
         })
@@ -132,9 +140,15 @@ export default {
           this.data2.length = 0;
           this.data4.length = 0;
           res.data.forEach((element) => {
-            this.data1.push(Math.floor((element[0] - 12) * 100) / 100);
-            this.data2.push(element[1]);
-            this.data4.push(Math.floor((element[2] / 1000) * 100) / 100);
+            if (element === null) {
+              this.data1.push(Math.floor(0));
+              this.data2.push(Math.floor(0));
+              this.data4.push(Math.floor(0));
+            } else {
+              this.data1.push(Math.floor((element[0] - 12) * 100) / 100);
+              this.data2.push(element[1]);
+              this.data4.push(Math.floor((element[2] / 1000) * 100) / 100);
+            }
           });
           this.data1.reverse();
           this.data2.reverse();

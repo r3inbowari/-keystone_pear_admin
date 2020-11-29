@@ -137,11 +137,19 @@ export default {
     parseDH(res) {
       let index = 11;
       res.forEach((elements) => {
-        this.chartData1.rows.push({
-          时间: index,
-          温: elements[0] - 12,
-          湿: elements[1],
-        });
+        if (elements === null) {
+          this.chartData1.rows.push({
+            时间: index,
+            温: 0,
+            湿: 0,
+          });
+        } else {
+          this.chartData1.rows.push({
+            时间: index,
+            温: elements[0] - 12,
+            湿: elements[1],
+          });
+        }
         index--;
       });
       this.chartData1.columns.push("时间");
@@ -151,11 +159,19 @@ export default {
     parsePress(res) {
       let index = 11;
       res.forEach((elements) => {
-        this.chartData1.rows.push({
-          时间: index,
-          压强: elements[2] / 1000,
-          高度: elements[3],
-        });
+        if (elements === null) {
+          this.chartData1.rows.push({
+            时间: index,
+            压强: 0,
+            高度: 0,
+          });
+        } else {
+          this.chartData1.rows.push({
+            时间: index,
+            压强: elements[2] / 1000,
+            高度: elements[3],
+          });
+        }
         index--;
       });
       this.chartData1.columns.push("时间");
@@ -165,13 +181,23 @@ export default {
     parseAPDS(res) {
       let index = 11;
       res.forEach((elements) => {
-        this.chartData1.rows.push({
-          时间: index,
-          CLEAR: elements[0],
-          RED: elements[1],
-          Green: elements[2],
-          Blue: elements[3],
-        });
+        if (elements === null) {
+          this.chartData1.rows.push({
+            时间: index,
+            CLEAR: 0,
+            RED: 0,
+            Green: 0,
+            Blue: 0,
+          });
+        } else {
+          this.chartData1.rows.push({
+            时间: index,
+            CLEAR: elements[0],
+            RED: elements[1],
+            Green: elements[2],
+            Blue: elements[3],
+          });
+        }
         index--;
       });
       this.chartData1.columns.push("时间");
@@ -183,11 +209,19 @@ export default {
     parseCSS(res) {
       let index = 11;
       res.forEach((elements) => {
-        this.chartData1.rows.push({
-          时间: index,
-          CO2: elements[0],
-          质量: elements[1],
-        });
+        if (elements === null) {
+          this.chartData1.rows.push({
+            时间: index,
+            CO2: 0,
+            质量: 0,
+          });
+        } else {
+          this.chartData1.rows.push({
+            时间: index,
+            CO2: elements[0],
+            质量: elements[1],
+          });
+        }
         index--;
       });
       this.chartData1.columns.push("时间");
@@ -225,7 +259,7 @@ export default {
             this.onlineValue2 = res.data.data[2];
             this.onlineValue3 = res.data.data[3];
           }
-          this.runTime = "更新时间 " + this.formatTime(new Date(), "hh:mm:ss");
+          this.runTime = "最后更新 " + this.formatTime(new Date(res.data.ts * 1000), "hh:mm:ss");
         })
         .catch(() => {
           console.log("[INFO] 网络出现问题！");
