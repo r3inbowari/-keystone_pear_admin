@@ -6,6 +6,7 @@
       v-model="tabbar_active"
       active-color="#32BAC0"
       inactive-color="#979797"
+      @click.native="onChange"
     >
       <van-tabbar-item badge="1" to="/home">
         <span style="font-weight: bold">主页</span>
@@ -63,9 +64,36 @@ export default {
         active: require("@/assets/icon_wiki_active.png"),
         inactive: require("@/assets/icon_wiki_inactive.png"),
       },
+      isDoubleFirst: false,
     };
   },
   methods: {
+    onChange() {
+      let top = document.documentElement.scrollTop || document.body.scrollTop;
+      if (top === 0) {
+        return;
+      }
+      if (this.isDoubleFirst) {
+        console.log("[INFO] navigation dblclick");
+        this.backTopAnimation();
+      }
+      this.isDoubleFirst = true;
+      setTimeout(() => {
+        this.isDoubleFirst = false;
+      }, 500);
+    },
+    backTopAnimation() {
+      console.log("[INFO] TopAnimation start");
+      let timer = setInterval(() => {
+        let top = document.documentElement.scrollTop || document.body.scrollTop;
+        let increase = top - 40;
+        document.documentElement.scrollTop = document.body.scrollTop = increase;
+        if (top <= 0) {
+          clearInterval(timer);
+          console.log("[INFO] TopAnimation end");
+        }
+      }, 15);
+    },
     afterRead(e) {
       this.onUploadFile(e.file, 1, 6, 7);
     },

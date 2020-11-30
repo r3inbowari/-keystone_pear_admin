@@ -4,6 +4,7 @@
     <div class="wiki-bg" :style="bg_wiki">
       <div class="now-style">
         <div class="wiki-auto-title">自动化运行(湿度)</div>
+        <div class="wiki-auto-tip">当前状态： {{ this.$root.rhMode }}</div>
         <div class="wiki-auto-tip">当前阈值区间(RH)： {{ this.$root.rh }}</div>
         <div style="height: 20px"></div>
         <van-slider
