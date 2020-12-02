@@ -90,14 +90,22 @@ export default {
           this.$root.ccsStatus = false;
         }
       } else if (action.name === "切换到联动模式") {
-        this.$root.openRHTask();
-        this.show = false;
+        if (this.name === "加湿器") {
+          this.$root.openRHTask();
+          this.show = false;
+        } else if (this.name === "日光灯") {
+          this.$root.openLightTask();
+          this.show = false;
+        }
       } else if (action.name === "切换到手动模式") {
         if (this.name === "加湿器") {
           this.$root.closeRHTask();
           this.show = false;
         } else if (this.name === "排风系统") {
           this.$root.closeCSSTask();
+          this.show = false;
+        } else if (this.name === "日光灯") {
+          this.$root.closeLightTask();
           this.show = false;
         }
       }
@@ -115,6 +123,14 @@ export default {
           this.actions.length = 0;
           if (this.name === "加湿器") {
             if (this.$root.rhMode === "手动模式") {
+              this.actions.push({ name: "切换到联动模式", color: "green" });
+            } else {
+              this.actions.push({ name: "切换到手动模式", color: "green" });
+            }
+          }
+
+          if (this.name === "日光灯") {
+            if (this.$root.lightMode === "手动模式") {
               this.actions.push({ name: "切换到联动模式", color: "green" });
             } else {
               this.actions.push({ name: "切换到手动模式", color: "green" });
@@ -168,6 +184,15 @@ export default {
                 this.actions.push({ name: "切换到自动模式", color: "green" });
               }
             }
+
+            if (this.name === "日光灯") {
+              if (this.$root.lightMode === "手动模式") {
+                this.actions.push({ name: "切换到联动模式", color: "green" });
+              } else {
+                this.actions.push({ name: "切换到手动模式", color: "green" });
+              }
+            }
+
             if (this.status) {
               this.actions.push({ name: "打开设备", color: "#979797" });
               this.actions.push({ name: "关闭设备" });

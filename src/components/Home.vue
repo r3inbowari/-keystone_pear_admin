@@ -43,7 +43,7 @@
               <IOTCard
                 img="https://img.yzcdn.cn/vant/cat.jpeg"
                 name="日光灯"
-                area="大棚A区 | 模式 手动模式"
+                :area="$root.lightModeStr0"
                 id="fa38c7e7-865d-4322-b693-d9f715857d2a"
                 pos="1"
                 type="coupler"

@@ -92,7 +92,43 @@ new Vue({
           console.log("[INFO] 网络出现问题！");
         })
       },
-
+      light: [18, 20],
+      lightMode: '手动模式',
+      taskLightInterval: 999980,
+      lightModeStr0: '大棚A区 | 模式 手动模式',
+      lightStatus: false,
+      openLightTask() {
+        console.log('[INFO] APDS切换到联动模式 | ' + '设定阈值: ' + this.light);
+        this.lightMode = '联动模式'
+        this.lightModeStr0 = '大棚A区 | 模式 ' + this.lightMode
+        console.log('[INFO] 尝试清除旧的 Auto task 并重启任务');
+        console.log('[INFO] 尝试重启照明系统');
+        clearInterval(this.taskLightInterval)
+        this.lightStatus = false
+        this.taskLightInterval = setInterval(() => {
+          let h = new Date().getHours()
+          console.log(h);
+          if (h >= this.light[0] && h <= this.light[1]) {
+            if (!this.lightStatus) {
+              console.log('yes');
+              this.switchTurn('a', 1, 6)
+              this.lightStatus = true
+            }
+          } else {
+            if (this.lightStatus) {
+              console.log('no');
+              this.switchTurn('a', 1, 5)
+              this.lightStatus = false
+            }
+          }
+        }, 10000);
+      },
+      closeLightTask() {
+        console.log('[INFO] APDS切换到手动模式');
+        this.rhMode = '手动模式'
+        this.lightModeStr0 = '大棚A区 | 模式 ' + this.lightMode
+        clearInterval(this.taskLightInterval)
+      },
       rh: [40, 50],
       rhStatus: false,
       rhMode: '手动模式',
@@ -101,14 +137,14 @@ new Vue({
       closeRHTask() {
         console.log('[INFO] BME280切换到手动模式');
         this.rhMode = '手动模式'
-        this.bmeModeStr0 = '大棚A区 | 模式 ' + this.rhMode,
-          clearInterval(this.taskRHInterval)
+        this.bmeModeStr0 = '大棚A区 | 模式 ' + this.rhMode
+        clearInterval(this.taskRHInterval)
       },
       openRHTask() {
         console.log('[INFO] BME280切换到联动模式 | ' + '设定阈值: ' + this.rh);
         this.rhMode = '联动模式'
-        this.bmeModeStr0 = '大棚A区 | 模式 ' + this.rhMode,
-          console.log('[INFO] 尝试清除旧的 Auto task 并重启任务');
+        this.bmeModeStr0 = '大棚A区 | 模式 ' + this.rhMode
+        console.log('[INFO] 尝试清除旧的 Auto task 并重启任务');
         console.log('[INFO] 尝试重启加湿系统');
         this.rhStatus = false
         this.switchTurn('a', 0, 5)

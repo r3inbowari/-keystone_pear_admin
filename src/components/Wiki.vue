@@ -3,6 +3,30 @@
     <van-nav-bar fixed title="百科与自动化" />
     <div class="wiki-bg" :style="bg_wiki">
       <div class="now-style">
+        <div class="wiki-auto-title">自动化运行(光照/水量)</div>
+        <div class="wiki-auto-tip">当前状态： {{ this.$root.rhMode }}</div>
+        <div class="wiki-auto-tip">
+          当前阈值区间(Time)： {{ this.$root.light }}
+        </div>
+        <div style="height: 20px"></div>
+        <van-slider
+          @change="changeSliderLight"
+          step="1"
+          range
+          min="0"
+          max="23"
+          style="margin: 0px"
+          v-model="$root.light"
+          bar-height="4px"
+          active-color="#ee0a24"
+        />
+        <div style="height: 30px"></div>
+        <div style="height: 30px">
+          <div class="wiki-auto-tip" style="float: left">浇水量(L) :</div>
+          <van-stepper style="float: right" v-model="value" integer min="0" />
+        </div>
+      </div>
+      <div class="now-style">
         <div class="wiki-auto-title">自动化运行(湿度)</div>
         <div class="wiki-auto-tip">当前状态： {{ this.$root.rhMode }}</div>
         <div class="wiki-auto-tip">当前阈值区间(RH)： {{ this.$root.rh }}</div>
@@ -22,7 +46,10 @@
         <div class="wiki-auto-title">自动化方案(百科)</div>
         <div class="wiki-auto-tip">当前状态： {{ this.$root.ccsMode }}</div>
         <div class="wiki-auto-tip">当前方案： {{ this.$root.name }}</div>
-        <div class="wiki-auto-tip">当前阶段： {{ this.$root.process }}</div>
+        <div class="wiki-auto-tip">
+          当前阶段： {{ this.$root.process }}
+          <span v-if="ppmValue !== 0"> ({{ ppmValue }} ppm)</span>
+        </div>
       </div>
       <div class="wikis">
         <WikiCard :ppms="ppms0" :name="name0" @select="onSelect"></WikiCard>
@@ -55,6 +82,8 @@ export default {
   },
   data() {
     return {
+      value: 10,
+      ppmValue: 0,
       name0: "🥒 黄瓜",
       name1: "🌶 辣椒",
       name2: "🍉 西瓜",
@@ -94,10 +123,19 @@ export default {
         this.$root.openRHTask();
       }
     },
+    changeSliderLight(e) {
+      if (e[0] === e[1]) {
+        this.$root.light[1]++;
+      }
+      if (this.$root.lightMode === "联动模式") {
+        this.$root.openLightTask();
+      }
+    },
     onSelect(e) {
       this.$root.name = e.name;
       this.$root.process = e.process;
       this.$notify({ type: "success", message: "操作成功" });
+      this.ppmValue = e.value;
       this.$root.openCSSTask(e.value);
     },
   },
